@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
+import { DarkModeContext } from '../context/DarkModeContext';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Index() {
   const router = useRouter();
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   const handleGoToChat = () => {
     router.push('/splashscreenchat');
@@ -13,10 +16,16 @@ export default function Index() {
     router.push('/splashscreenwelcome');
   };
 
-  
-
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#000' : '#343541' }]}>
+      {/* Botón de cambio de tema */}
+      <TouchableOpacity style={styles.darkModeButton} onPress={toggleDarkMode}>
+        {isDarkMode ? (
+          <Ionicons name="sunny" size={24} color="#fff" />
+        ) : (
+          <Ionicons name="moon" size={24} color="#fff" />
+        )}
+      </TouchableOpacity>
       <Text style={styles.title}>Bienvenido!!!</Text>
       <Image source={require('../assets/images/logo.png')} style={styles.logo} />
       <TouchableOpacity style={styles.button} onPress={handleGoToChat}>
@@ -25,7 +34,6 @@ export default function Index() {
       <TouchableOpacity style={styles.button} onPress={handleGoToWelcome}>
         <Text style={styles.buttonText}>Welcome</Text>
       </TouchableOpacity>
-      
     </View>
   );
 }
@@ -33,9 +41,17 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#343541',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  darkModeButton: {
+    position: 'absolute',
+    top: 40,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#2AB37E',
+    borderRadius: 5,
+    zIndex: 10,
   },
   title: {
     color: '#fff',
@@ -54,6 +70,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  logo: { width: 100, height: 100, resizeMode: 'contain', marginBottom: 10 },
-
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    marginBottom: 10,
+  },
 });

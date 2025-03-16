@@ -1,35 +1,36 @@
-// app/splashscreen.tsx
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useEffect, useContext } from 'react';
+import { View, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
+import { DarkModeContext } from '../context/DarkModeContext';
 
-export default function SplashScreen() {
+export default function SplashScreenChat() {
   const router = useRouter();
+  const { isDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Navegamos a /welcome
       router.replace('/chat');
     }, 2000);
-
     return () => clearTimeout(timer);
   }, [router]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#000' : '#343541' }]}>
       <Image source={require('../assets/images/logo.png')} style={styles.logo} />
     </View>
   );
 }
 
-// Estilos:
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#343541',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  logo: { width: 100, height: 100, resizeMode: 'contain', marginBottom: 10 },
-  text: { color: '#fff', fontSize: 20 },
+  logo: { 
+    width: 100, 
+    height: 100, 
+    resizeMode: 'contain', 
+    marginBottom: 10 
+  },
 });
