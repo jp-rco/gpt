@@ -14,6 +14,11 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
   - Contiene un `DarkModeProvider` que envuelve toda la app.  
   - Expone la propiedad `isDarkMode` y la función `toggleDarkMode` para alternar entre modo oscuro y modo claro.
 
+  ![Modo oscuro](./assets/images/home-dark.png "Modo oscuro")
+
+  ![Modo claro](./assets/images/home-light.png "Modo oscuro")
+
+
 ---
 
 ### 2. `_layout.tsx`
@@ -47,6 +52,10 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
   - Permite mostrar/ocultar la contraseña con un ícono de ojo (`Ionicons`).
   - Incluye modo oscuro usando el contexto `DarkModeContext`.
 
+  ![Registro light](./assets/images/registro.png "registro modo claro")
+
+  ![Login dark](./assets/images/LOGIN.png "Login modo oscuro")
+
 ---
 
 ### 4. `chat.tsx`
@@ -66,6 +75,12 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
   - Almacena cada sesión de chat en la colección `chatSessions` y los mensajes en subcolecciones `messages` dentro de cada sesión.
   - Auto-scroll al final de la lista de mensajes con un `ScrollView` y `scrollToEnd`.
   - Incluye un botón tipo “hamburguesa” (ícono de menú) para abrir/cerrar el menú lateral.
+
+  ![Empty chat](./assets/images/emptychat.png "Empty chat")
+
+  ![chat con markdowns](./assets/images/chat.png "chat")
+
+  ![Menú desplegable](./assets/images/ "Menú desplegable")
 
 ---
 
