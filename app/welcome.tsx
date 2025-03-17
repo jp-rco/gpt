@@ -1,5 +1,4 @@
-// app/welcome.tsx
-import React, { useState, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -10,14 +9,18 @@ import {
   Dimensions
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { DarkModeContext } from '../context/DarkModeContext';
 
 const { width } = Dimensions.get('window');
 
 export default function Welcome() {
   const router = useRouter();
-  const [pageIndex, setPageIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
 
+  const [pageIndex, setPageIndex] = useState(0);
+
+  // Datos de las tarjetas
   const pages = [
     {
       title: 'Examples',
@@ -45,7 +48,11 @@ export default function Welcome() {
     }
   ];
 
-  // Actualiza el índice de página mientras haces scroll horizontal
+  // DarkMode
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const styles = getStyles(isDarkMode);
+
+  // Manejo del scroll horizontal para paginación
   const handleScroll = (event: any) => {
     const scrollX = event.nativeEvent.contentOffset.x;
     const newPageIndex = Math.round(scrollX / width);
@@ -58,16 +65,24 @@ export default function Welcome() {
       scrollViewRef.current?.scrollTo({
         x: (pageIndex + 1) * width,
         y: 0,
-        animated: true,
+        animated: true
       });
     } else {
-      // Vamos a la pantalla de chat
-      router.push('/chat');
+      router.push('/chat?forceNew=1');
     }
   };
 
   return (
     <View style={styles.container}>
+      {/* Botón para alternar tema */}
+      <TouchableOpacity style={styles.darkModeButton} onPress={toggleDarkMode}>
+        {isDarkMode ? (
+          <Ionicons name="sunny" size={24} color="#fff" />
+        ) : (
+          <Ionicons name="moon" size={24} color="#fff" />
+        )}
+      </TouchableOpacity>
+
       {/* Encabezado */}
       <View style={styles.header}>
         <Image
@@ -101,7 +116,7 @@ export default function Welcome() {
         </ScrollView>
       </View>
 
-      {/* Botón */}
+      {/* Botón Next / Let’s Chat */}
       <TouchableOpacity style={styles.button} onPress={handleNextPress}>
         <Text style={styles.buttonText}>
           {pageIndex < pages.length - 1 ? 'Next' : `Let's Chat →`}
@@ -111,68 +126,79 @@ export default function Welcome() {
   );
 }
 
-// Estilos
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#343541',
-  },
-  header: {
-    alignItems: 'center',
-    marginTop: 40,
-    marginBottom: 20,
-  },
-  logo: {
-    width: 50,
-    height: 50,
-    resizeMode: 'contain',
-    marginBottom: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: 'white',
-    marginBottom: 10,
-  },
-  scrollContainer: {
-    height: 250,
-    overflow: 'hidden',
-  },
-  page: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sectionTitle: {
-    fontSize: 18,
-    color: 'white',
-    marginVertical: 10,
-    textAlign: 'center',
-  },
-  itemBox: {
-    backgroundColor: '#4A4B57',
-    padding: 15,
-    borderRadius: 10,
-    marginVertical: 5,
-    width: width * 0.9,
-  },
-  itemText: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: '#2AB37E',
-    margin: 20,
-    paddingVertical: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
+// Función de estilos
+function getStyles(isDarkMode: boolean) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: isDarkMode ? '#000' : '#343541'
+    },
+    darkModeButton: {
+      position: 'absolute',
+      top: 40,
+      right: 20,
+      padding: 10,
+      backgroundColor: '#2AB37E',
+      borderRadius: 5,
+      zIndex: 10
+    },
+    header: {
+      alignItems: 'center',
+      marginTop: 40,
+      marginBottom: 20
+    },
+    logo: {
+      width: 50,
+      height: 50,
+      resizeMode: 'contain',
+      marginBottom: 10
+    },
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: 'white'
+    },
+    subtitle: {
+      fontSize: 16,
+      color: 'white',
+      marginBottom: 10
+    },
+    scrollContainer: {
+      height: 250,
+      overflow: 'hidden'
+    },
+    page: {
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    sectionTitle: {
+      fontSize: 18,
+      color: 'white',
+      marginVertical: 10,
+      textAlign: 'center'
+    },
+    itemBox: {
+      backgroundColor: '#4A4B57',
+      padding: 15,
+      borderRadius: 10,
+      marginVertical: 5,
+      width: width * 0.9
+    },
+    itemText: {
+      color: '#fff',
+      textAlign: 'center'
+    },
+    button: {
+      backgroundColor: '#2AB37E',
+      margin: 20,
+      paddingVertical: 15,
+      borderRadius: 10,
+      alignItems: 'center'
+    },
+    buttonText: {
+      color: '#fff',
+      fontSize: 18,
+      fontWeight: 'bold'
+    }
+  });
+}
