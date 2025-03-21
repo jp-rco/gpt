@@ -80,7 +80,7 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
 
   ![chat con markdowns](./assets/images/chat.png "chat")
 
-  ![Menú desplegable](./assets/images/ "Menú desplegable")
+  ![Menú desplegable](./assets/images/menu.png "Menú desplegable")
 
 ---
 
