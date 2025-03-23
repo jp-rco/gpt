@@ -71,6 +71,7 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
     - Cambiar a modo oscuro.
     - Cerrar sesión (logout).
     - Ir a la pantalla de **Upgrade Plus**.
+    - Navegar a la página de OPENAI para preguntas frecuentes y actualizaciones
 - **Puntos Clave**:
   - Almacena cada sesión de chat en la colección `chatSessions` y los mensajes en subcolecciones `messages` dentro de cada sesión.
   - Auto-scroll al final de la lista de mensajes con un `ScrollView` y `scrollToEnd`.
@@ -81,6 +82,10 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
   ![chat con markdowns](./assets/images/chat.png "chat")
 
   ![Menú desplegable](./assets/images/menu.png "Menú desplegable")
+
+  ![Ventana Upgrade to plus](./assets/images/upgradetoplus.png "Ventana upgrade to plus")
+
+  ![PQA OpenAI](./assets/images/PQA-openAI.png "PQA OpenAI")
 
 ---
 
@@ -97,6 +102,8 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
 - **Uso Principal**:
   - Sirve como punto de partida desde donde el usuario decide si ir al chat o a la sección "Welcome".
 
+  ![Index](./assets/images/index.png "Index")
+
 ---
 
 ### 6. `splashscreenchat.tsx`
@@ -106,6 +113,9 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
 - **Uso Principal**:
   - Transición inicial para mejorar la experiencia de usuario antes de cargar el chat.
 
+  ![Splashscreen](./assets/images/splashscreen.png "Splashscreen")
+  
+
 ---
 
 ### 7. `splashscreenwelcome.tsx`
@@ -114,6 +124,10 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
   Pantalla de **splash** previa a la sección “Welcome”. Similar a la anterior, muestra un logotipo y redirige a `welcome.tsx` tras 2 segundos.
 - **Uso Principal**:
   - Dar una breve transición o animación inicial para la experiencia de bienvenida.
+  
+
+    ![Splashscreen](./assets/images/splashscreen.png "Splashscreen")
+
 
 ---
 
@@ -129,6 +143,14 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
   - Al terminar, se muestra un botón para redirigir finalmente al chat.
   - Incluye nuevamente la lógica de modo oscuro.
 
+  ![Welcome 1](./assets/images/welcome(1).png "Welcome 1")
+
+  ![Welcome 2](./assets/images/welcome(2).png "Welcome 2")
+
+  ![Welcome 3](./assets/images/welcome(3).png "Welcome 3")
+
+      
+
 ---
 
 ### 9. `upgradeplus.tsx`
@@ -138,7 +160,10 @@ Este proyecto es una aplicación construida con **React Native** y **Expo Router
   Muestra precios, características y un botón para seleccionar cada plan.
 - **Uso Principal**:
   - Permite ilustrar diferentes planes de pago al usuario (ejemplo ficticio).
-  - Integra el modo oscuro para mantener coherencia visual.
+  - Integra el modo oscuro para mantener coherencia visual
+  
+
+![Upgrade to plus](./assets/images/upgradetoplus.png "Upgrade to plus")
 
 ---
 
